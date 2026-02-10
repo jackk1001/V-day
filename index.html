@@ -67,11 +67,13 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
 </style>
 </head>
 <body>
+    
 <!-- PAGE 1: Landing / Message -->
 <div id="page1" class="page active">
     <h1><span id="typewriterText"></span></h1>
     <button id="proceedBtn" style="display:none;">Understood</button>
 </div>
+    
 <!-- PAGE 2: Valentine Question -->
 <div id="page2" class="page">
     <h1>Asia Lao, would you be my Valentine? ❤️</h1>
@@ -81,12 +83,14 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
         <button id="noBtn">No ☹️</button>
     </div>
 </div>
+    
 <!-- PAGE 3: Celebration -->
 <div id="page3" class="page">
     <h1>Yay!! I knew you’d say yes 🥰</h1>
     <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" />
     <button onclick="goToItinerary()">See our date plan ✨</button>
 </div>
+    
 <!-- PAGE 4: Itinerary -->
 <div id="page4" class="page">
     <h1>Our Valentine’s Itinerary ❤️</h1>
@@ -105,6 +109,7 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
     <p>6:30PM: Hug Break </p>
     <p>7:00PM: Massage </p>
 </div>
+    
 <script>
 // ===== TYPEWRITER EFFECT =====
 const message = "Asia Lao, this is an important message for you — I need you to answer truthfully";
@@ -121,6 +126,7 @@ function typeWriter() {
     }
 }
 typeWriter();
+    
 // ===== PAGE NAVIGATION =====
 document.getElementById("proceedBtn").addEventListener("click", () => {
     showPage("page2");
@@ -134,6 +140,7 @@ function showPage(pageId) {
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById(pageId).classList.add("active");
 }
+    
 // ===== FLOATING NO BUTTON =====
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
@@ -142,6 +149,7 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 });
+    
 // ===== CONFETTI EFFECT =====
 function launchConfetti() {
     for (let i = 0; i < 50; i++) {
@@ -153,6 +161,7 @@ function launchConfetti() {
         setTimeout(() => confetti.remove(), 4000);
     }
 }
+    
 // ===== FLOATING HEARTS PERIODICALLY =====
 setInterval(() => {
     const heart = document.createElement('div');
@@ -163,6 +172,8 @@ setInterval(() => {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 4000);
 }, 500);
+
+    
 </script>
 </body>
 </html>
