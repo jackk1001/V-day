@@ -53,26 +53,21 @@ button {
 img { width: 200px; margin: 20px 0; border-radius: 12px; }
 #couplePhoto { width: 250px; border-radius: 20px; margin: 15px 0; }
 
-/* Floating hearts */
-.heart {
-    position: fixed;
-    font-size: 1.5rem;
-    color: #ff4d9e;
-    animation: floatUp 4s linear forwards;
-    pointer-events: none;
-    z-index: 999;
-}
-@keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-500px) scale(1.2); opacity: 0; }
-}
+/* floating hearts */
+    .heart {
+        position: fixed;
+        bottom: -10px;
+        font-size: 20px;
+        animation: floatUp 5s linear infinite;
+        opacity: 0.8;
+    }
 
-/* Typewriter blinking cursor */
-#typewriterText::after {
-    content: '|';
-    animation: blink 0.7s infinite;
-}
-@keyframes blink { 0%, 50%, 100% { opacity: 1; } 25%, 75% { opacity: 0; } }
+    @keyframes floatUp {
+        to {
+            transform: translateY(-110vh);
+            opacity: 0;
+        }
+    }
 </style>
 </head>
 <body>
@@ -80,7 +75,7 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
 <!-- PAGE 1: Landing / Message -->
 <div id="page1" class="page active">
     <h1><span id="typewriterText"></span></h1>
-    <button id="proceedBtn" style="display:none;">Understood</button>
+    <button onclick="showPage('page2')">Proceed ❤️</button>
 </div>
 
 <!-- PAGE 2: Valentine Question -->
@@ -118,7 +113,22 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
     <p>7:00PM: Massage </p>
 </div>
 
+<!--script -->
+<!-- Confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
+/* PAGE NAVIGATION */
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+
+    // start hearts only from page 2 onwards
+    if (pageId !== 'page1') {
+        startHearts();
+    }
+}   
+    
 // ===== TYPEWRITER EFFECT =====
 const message = "Asia Lao, this is an important message for you — I need you to answer truthfully";
 const typewriterText = document.getElementById("typewriterText");
@@ -161,16 +171,37 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.top = y + "px";
 });
 
-// ===== CONFETTI EFFECT =====
-function launchConfetti() {
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('heart');
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 4000);
-    }
+/* CONFETTI */
+function goToYayPage() {
+    showPage('page3');
+
+    setTimeout(() => {
+        fireConfetti();
+    }, 400);
+}
+
+function fireConfetti() {
+    var duration = 3 * 1000;
+    var end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 6,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+        });
+        confetti({
+            particleCount: 6,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
 }
 
 // ===== FLOATING HEARTS PERIODICALLY =====
