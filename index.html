@@ -132,8 +132,13 @@ function typeWriter() {
 typeWriter();
 
 // ===== PAGE NAVIGATION =====
-document.getElementById("proceedBtn").addEventListener("click", () => showPage("page2"));
-document.getElementById("yesBtn").addEventListener("click", () => showPage("page3"));
+document.getElementById("proceedBtn").addEventListener("click", () => {
+    showPage("page2");
+});
+document.getElementById("yesBtn").addEventListener("click", () => {
+    showPage("page3");
+    launchConfetti();
+});
 
 function goToItinerary() { showPage("page4"); }
 
@@ -150,6 +155,29 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 });
+
+// ===== CONFETTI EFFECT =====
+function launchConfetti() {
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('heart');
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+
+// ===== FLOATING HEARTS PERIODICALLY =====
+setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (10 + Math.random() * 20) + "px";
+    heart.innerHTML = '❤️';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}, 500);
 </script>
 
 </body>
