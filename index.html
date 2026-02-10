@@ -75,7 +75,7 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
 <!-- PAGE 1: Landing / Message -->
 <div id="page1" class="page active">
     <h1><span id="typewriterText"></span></h1>
-    <button onclick="showPage('page2')">Proceed ❤️</button>
+    <button onclick="showPage('page2')">Understood</button>
 </div>
 
 <!-- PAGE 2: Valentine Question -->
@@ -83,8 +83,8 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
     <h1>Asia Lao, would you be my Valentine? ❤️</h1>
     <img id="couplePhoto" src="https://github.com/jackk1001/V-day/raw/main/JDsqBYyE.jpg" alt="Us together">
     <div>
-        <button id="yesBtn">YES 💕</button>
-        <button id="noBtn">No ☹️</button>
+        <button class="yes" onclick="goToYayPage()">YES ❤️</button>
+        <button class="no" id="noBtn">No ☹️</button>
     </div>
 </div>
 
@@ -92,7 +92,7 @@ img { width: 200px; margin: 20px 0; border-radius: 12px; }
 <div id="page3" class="page">
     <h1>Yay!! I knew you’d say yes 🥰</h1>
     <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" />
-    <button onclick="goToItinerary()">See our date plan ✨</button>
+    <button onclick="showPage('page4')">See our date plan ✨</button>
 </div>
 
 <!-- PAGE 4: Itinerary -->
@@ -145,22 +145,6 @@ function typeWriter() {
     }
 }
 typeWriter();
-
-// ===== PAGE NAVIGATION =====
-document.getElementById("proceedBtn").addEventListener("click", () => {
-    showPage("page2");
-});
-document.getElementById("yesBtn").addEventListener("click", () => {
-    showPage("page3");
-    launchConfetti();
-});
-
-function goToItinerary() { showPage("page4"); }
-
-function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById(pageId).classList.add("active");
-}
 
 // ===== FLOATING NO BUTTON =====
 const noBtn = document.getElementById("noBtn");
